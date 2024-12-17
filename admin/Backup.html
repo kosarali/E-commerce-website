@@ -1,0 +1,207 @@
+<div class="carousel-container">
+    <div class="carousel">
+        <div class="slide">
+            <img src="image1.jpg" alt="Image 1">
+        </div>
+        <div class="slide">
+            <img src="image2.jpg" alt="Image 2">
+        </div>
+        <div class="slide">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+        <!-- Add more slides as needed -->
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</div>
+
+<script src="script.js"></script>
+
+
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide"><img src="./img/E-shop.jpg" alt="Image 1"></div>
+        <div class="slide"><img src="./img/Free_shipping.jpg" alt="Image 2"></div>
+        <div class="slide"><img src="./img/sale.jpg" alt="Image 3"></div>
+        <div class="slide"><img src="./img/sale2.jpg" alt="Image 4"></div>
+    </div>
+</div>
+        <div class="slider-buttons"></div>
+
+
+
+
+
+
+
+<!-- categories-->
+<section id="categorie">
+    <nav class="categories">
+        <div class="container">
+            <ul class="category-list">
+                <li class="category-item">
+                    <img src="./img/gro.jpg" alt="Grocery">
+                    <span>Grocery</span>
+                </li>
+                <li class="category-item">
+                    <img src="./img/mobile.png" alt="Mobiles">
+                    <span>Mobiles</span>
+                </li>
+                <li class="category-item">
+                    <img src="./img/clothes.jpg" alt="Fashion">
+                    <span class="dropdown">Fashion
+                        <ul class="dropdown-menu">
+                            <li><a href="index.php">Men</a></li>
+                            <li><a href="#">Women</a></li>
+                            <li><a href="#">Kids</a></li>
+                        </ul>
+                    </span>
+                </li>
+                <li class="category-item">
+                    <img src="./img/laptop.jpg" alt="Electronics">
+                    <span class="dropdown">Electronics
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Laptops</a></li>
+                            <li><a href="#">Cameras</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </span>
+                </li>
+                <li class="category-item">
+                    <img src="./img/furniture.jpg" alt="Home & Furniture">
+                    <span class="dropdown">Furniture
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Living Room</a></li>
+                            <li><a href="#">Bedroom</a></li>
+                            <li><a href="#">Office</a></li>
+                        </ul>
+                    </span>
+                </li>
+                <li class="category-item">
+                    <img src="./img/images.png" alt="Appliances">
+                    <span>Appliances</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    </section>
+    <script src="./assets/js/dropdown.js"></script>
+
+
+
+
+
+    <!-- feedback -->
+
+
+    <tbody>
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . $row['name'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['subject'] . "</td>";
+                echo "<td>" . $row['message'] . "</td>";
+                echo "<td>" . $row['created_at'] . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No feedback available</td></tr>";
+        }
+        ?>
+    </tbody>
+
+
+
+
+
+
+
+    <?php
+include('../server/connection.php'); // Connect to the database
+include('include/header.php'); // Include the admin header
+
+// Fetch all feedback from the database
+$sql = "SELECT * FROM feedback ORDER BY created_at DESC";
+$result = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Feedback</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Order List</h3>
+                </div>
+
+                <div class="order-body">
+                <table class="table mb-3">
+            <thead>
+              <tr>
+                <th class="text-center">Order ID</th>
+                <th class="text-center">Order Status</th>
+                <th class="text-center">User ID</th>
+                <th class="text-center">Order Date</th>
+                <th class="text-center">User Phone</th>
+                <th class="text-center">User Address</th>
+                <th class="text-center">User pincode</th>
+
+                
+               
+              </tr>
+            </thead>
+            <tbody>
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['name'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['subject'] . "</td>";
+                    echo "<td>" . $row['message'] . "</td>";
+                    echo "<td>" . $row['created_at'] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No feedback available</td></tr>";
+            }
+            ?>
+            </tbody>
+          </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include('include/footer.php'); ?>
+
+
+
+
+<thead>
+    <tr>
+      <th class="text-center">ID</th>
+      <th class="text-center">Name</th>
+      <th class="text-center">Email ID</th>
+      <th class="text-center">Subject</th>
+      <th class="text-center">Message</th>
+      <th class="text-center">Submitted</th>
+      <!-- <th class="text-center">User pincode</th> -->
+
+      
+     
+    </tr>
+  </thead>
